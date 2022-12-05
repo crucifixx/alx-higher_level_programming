@@ -1,4 +1,4 @@
-nclude <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "lists.h"
 /**
@@ -10,18 +10,19 @@ int is_palindrome(listint_t **head)
 {
 	int len = 0, i = 0;
 	listint_t *tmp;
-	int Ns[10000];
+	int *Ns;
 
 	tmp = *head;
 	if ((*head) == NULL)
 		return (1);
-	while (tmp != NULL)
+	while (tmp->next != NULL)
 	{
 		len++;
 		tmp = tmp->next;
 	}
 	if (len == 1)
 		return (1);
+	Ns = malloc(sizeof(int) * len);
 	tmp = *head;
 	while (tmp != NULL)
 	{
@@ -31,10 +32,8 @@ int is_palindrome(listint_t **head)
 	}
 	for (i = 0; i <= len / 2; i++)
 	{
-		if (Ns[i] != Ns[len - i - 1])
-		{
+		if(Ns[i] != Ns[len - i])
 			return (0);
-		}
 	}
 	return (1);
 }
